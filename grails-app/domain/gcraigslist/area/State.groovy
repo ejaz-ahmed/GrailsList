@@ -9,4 +9,8 @@ class State {
     static constraints = {
         abbreviation maxSize: 2
     }
+
+    static mapping = {
+        cities sort: 'name'
+    }
 }
