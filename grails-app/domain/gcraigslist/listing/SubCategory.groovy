@@ -8,4 +8,9 @@ class SubCategory {
 
     static constraints = {
     }
+
+    @Override
+    String toString(){
+        name
+    }
 }

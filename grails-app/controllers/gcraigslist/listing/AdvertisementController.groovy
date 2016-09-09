@@ -21,7 +21,8 @@ class AdvertisementController {
     }
 
     def create() {
-        respond new Advertisement(params)
+        def subCategories = Category.get(params.category).subCategories
+        respond new Advertisement(params), model:[subcategories:subCategories]
     }
 
     @Transactional

@@ -16,6 +16,7 @@
             </ul>
             </g:hasErrors>
             <g:form action="save">
+                <g:select name="subCategory" from="${subcategories}" optionValue="name" optionKey="id"/>
                 <fieldset class="form">
                     <f:with bean="advertisement">
                         <f:field property="title"/>
