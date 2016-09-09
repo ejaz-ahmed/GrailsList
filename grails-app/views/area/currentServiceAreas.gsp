@@ -16,7 +16,7 @@
                 <div class="panel-body">
                     <ul class="list-group">
                         <g:each in="${state.cities}">
-                            <li class="list-group-item"><a href="http://${it.urlSlug}.localhost:8080">${it.name}</a> </li>
+                            <li class="list-group-item"><a href="http://${it.urlSlug}.localhost:8080">${it.name}</a></li>
                         </g:each>
                     </ul>
                 </div>

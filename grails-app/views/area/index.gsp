@@ -13,7 +13,7 @@
                 <div class="panel-body">
                     <ul class="list-group">
                         <g:each in="${category.subCategories}">
-                            <li class="list-group-item">${it.name}</li>
+                            <li class="list-group-item"><a href="${createLink(action:'listAdvertisements', base:"${request.requestURL[0..-2]}", controller:'area', id: it.id)}">${it.name}</a></li>
                         </g:each>
                     </ul>
                 </div>

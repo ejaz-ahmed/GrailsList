@@ -1,6 +1,8 @@
 package gcraigslist.area
 
+import gcraigslist.listing.Advertisement
 import gcraigslist.listing.Category
+import gcraigslist.listing.SubCategory
 import grails.gorm.multitenancy.Tenants
 
 class AreaController {
@@ -22,9 +24,13 @@ class AreaController {
     }
 
     def currentServiceAreas(){
-        def states =  State.list()
+        def states = State.list()
 
         [states:states]
+    }
 
+    def listAdvertisements(){
+        def advertisements = Advertisement.findAllBySubCategory(SubCategory.get(params.id))
+        [advertisements:advertisements]
     }
 }
