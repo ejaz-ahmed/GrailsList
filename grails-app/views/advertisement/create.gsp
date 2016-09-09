@@ -2,19 +2,9 @@
 <html>
     <head>
         <meta name="layout" content="main" />
-        <g:set var="entityName" value="${message(code: 'advertisement.label', default: 'Advertisement')}" />
-        <title><g:message code="default.create.label" args="[entityName]" /></title>
     </head>
     <body>
-        <a href="#create-advertisement" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div class="nav" role="navigation">
-            <ul>
-                <li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-                <li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-            </ul>
-        </div>
-        <div id="create-advertisement" class="content scaffold-create" role="main">
-            <h1><g:message code="default.create.label" args="[entityName]" /></h1>
+        <div class="container">
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
@@ -26,15 +16,19 @@
             </ul>
             </g:hasErrors>
             <g:form action="save">
-                <fieldset class="form">
-                    <f:with bean="advertisement">
-                        <f:field property="title"/>
-                        <f:field property="description"/>
-                    </f:with>
-                </fieldset>
-                <fieldset class="buttons">
-                    <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-                </fieldset>
+                <div class="form-group">
+                    <label for="subCategory">Subcategory:</label>
+                    <g:select class="form-control" name="subCategory" from="${subcategories}" optionValue="name" optionKey="id"/>
+                </div>
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <g:textField class="form-control" name="title"/>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <g:textArea class="form-control" name="description" rows="10"/>
+                </div>
+                <g:submitButton name="create" class="btn btn-success" value="Submit" />
             </g:form>
         </div>
     </body>
