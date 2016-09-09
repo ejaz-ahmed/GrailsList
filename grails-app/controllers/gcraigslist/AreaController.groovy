@@ -2,6 +2,7 @@ package gcraigslist
 
 import gcraigslist.area.City
 import gcraigslist.area.State
+import gcraigslist.listing.Category
 import grails.gorm.multitenancy.Tenants
 
 class AreaController {
@@ -16,7 +17,8 @@ class AreaController {
             }
             redirect(action: 'currentServiceAreas')
         } else {
-            [city:city]
+            def categories = Category.list()
+            [city:city, categories:categories]
         }
 
     }

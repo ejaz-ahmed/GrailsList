@@ -4,6 +4,7 @@ class SubCategory {
     String name
 
     static belongsTo = [category:Category]
+    static hasMany = [advertisements:Advertisement]
 
     static constraints = {
     }

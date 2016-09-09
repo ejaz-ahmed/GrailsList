@@ -1,12 +1,13 @@
 package gcraigslist.listing
 
-import gcraigslist.area.City
-
 class Category {
     String name
-
-    static belongsTo = [city:City]
+    static hasMany = [subCategories:SubCategory]
 
     static constraints = {
+    }
+
+    static mapping = {
+        subCategories sort: 'name'
     }
 }
