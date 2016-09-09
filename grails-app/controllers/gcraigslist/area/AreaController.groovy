@@ -1,7 +1,5 @@
-package gcraigslist
+package gcraigslist.area
 
-import gcraigslist.area.City
-import gcraigslist.area.State
 import gcraigslist.listing.Category
 import grails.gorm.multitenancy.Tenants
 

@@ -1,5 +1,6 @@
 package gcraigslist
 
+import gcraigslist.area.AreaController
 import grails.test.mixin.TestFor
 import spock.lang.Specification
 

@@ -25,8 +25,6 @@ class BootStrap {
                     category.save(failOnError: true)
                 }
 
-
-
             }
         }
     }

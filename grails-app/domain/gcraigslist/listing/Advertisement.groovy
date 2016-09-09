@@ -7,6 +7,7 @@ class Advertisement implements MultiTenant<Advertisement> {
     String description
 
     String tenantId //This is the magical column that makes this work.
+    static belongsTo = [subCategory:SubCategory]
 
     static constraints = {
     }
