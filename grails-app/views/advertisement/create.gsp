@@ -4,7 +4,7 @@
         <meta name="layout" content="main" />
     </head>
     <body>
-        <div id="create-advertisement" class="content scaffold-create" role="main">
+        <div class="container">
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
@@ -16,16 +16,19 @@
             </ul>
             </g:hasErrors>
             <g:form action="save">
-                <g:select name="subCategory" from="${subcategories}" optionValue="name" optionKey="id"/>
-                <fieldset class="form">
-                    <f:with bean="advertisement">
-                        <f:field property="title"/>
-                        <f:field property="description"/>
-                    </f:with>
-                </fieldset>
-                <fieldset class="buttons">
-                    <g:submitButton name="create" class="save" value="${message(code: 'default.button.create.label', default: 'Create')}" />
-                </fieldset>
+                <div class="form-group">
+                    <label for="subCategory">Subcategory:</label>
+                    <g:select class="form-control" name="subCategory" from="${subcategories}" optionValue="name" optionKey="id"/>
+                </div>
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <g:textField class="form-control" name="title"/>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description:</label>
+                    <g:textArea class="form-control" name="description" rows="10"/>
+                </div>
+                <g:submitButton name="create" class="btn btn-success" value="Submit" />
             </g:form>
         </div>
     </body>
