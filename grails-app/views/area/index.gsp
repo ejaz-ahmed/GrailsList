@@ -8,7 +8,7 @@
         <div class="col-md-3">
             <div class="panel panel-info">
                 <div class="panel-heading">
-                    <h3 class="panel-title">${category.name}</h3>
+                    <h3 class="panel-title">${category.name} <small class="pull-right badge"><g:link action="create" controller="advertisement" params="['category':"${category.id}"]">Create Advertisement</g:link> </small></h3>
                 </div>
                 <div class="panel-body">
                     <ul class="list-group">
