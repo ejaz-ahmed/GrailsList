@@ -1,5 +1,8 @@
 package gcraigslist.listing
 
+import gcraigslist.area.City
+import grails.gorm.multitenancy.Tenants
+
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -10,7 +13,7 @@ class AdvertisementController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Advertisement.list(params), model:[advertisementCount: Advertisement.count()]
+        respond Advertisement.list(params), model: [advertisementCount: Advertisement.count()]
     }
 
     def show(Advertisement advertisement) {
@@ -29,13 +32,21 @@ class AdvertisementController {
             return
         }
 
-        if (advertisement.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond advertisement.errors, view:'create'
+        String currentTenant = Tenants.currentId()
+        City city = City.findByNameOrUrlSlug(currentTenant.capitalize(), currentTenant)
+        if (!city) {
+            if (!currentTenant == 'DEFAULT') {
+                flash.notavailable = "Sorry, your city is not available yet. Thank you for your interest! This has been logged and we will keep you in mind!"
+            }
+            redirect(action: 'currentServiceAreas')
             return
         }
 
-        advertisement.save flush:true
+        advertisement.tenantId = currentTenant
+        advertisement.subCategory = SubCategory.get(1)
+
+        advertisement.save(flush: true)
+
 
         request.withFormat {
             form multipartForm {
@@ -60,18 +71,18 @@ class AdvertisementController {
 
         if (advertisement.hasErrors()) {
             transactionStatus.setRollbackOnly()
-            respond advertisement.errors, view:'edit'
+            respond advertisement.errors, view: 'edit'
             return
         }
 
-        advertisement.save flush:true
+        advertisement.save flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'advertisement.label', default: 'Advertisement'), advertisement.id])
                 redirect advertisement
             }
-            '*'{ respond advertisement, [status: OK] }
+            '*' { respond advertisement, [status: OK] }
         }
     }
 
@@ -84,14 +95,14 @@ class AdvertisementController {
             return
         }
 
-        advertisement.delete flush:true
+        advertisement.delete flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'advertisement.label', default: 'Advertisement'), advertisement.id])
-                redirect action:"index", method:"GET"
+                redirect action: "index", method: "GET"
             }
-            '*'{ render status: NO_CONTENT }
+            '*' { render status: NO_CONTENT }
         }
     }
 
@@ -101,7 +112,7 @@ class AdvertisementController {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'advertisement.label', default: 'Advertisement'), params.id])
                 redirect action: "index", method: "GET"
             }
-            '*'{ render status: NOT_FOUND }
+            '*' { render status: NOT_FOUND }
         }
     }
 }
