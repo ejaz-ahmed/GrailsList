@@ -8,7 +8,7 @@ class BootStrap {
             development{
                 def cities = ['Midland','Odessa','Stanton','Big Spring']
                 State state = new State(name:"Texas",abbreviation:"TX")
-                cities.each {state.addToCities(new City(name: it))}
+                cities.each {state.addToCities(new City(name: it, urlSlug: it.toLowerCase().replaceAll("\\s","")))}
 
                 state.save(failOnError:true)
 

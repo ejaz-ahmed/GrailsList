@@ -8,7 +8,7 @@ class AreaController {
 
     def index() {
         String currentTenant = Tenants.currentId()
-        City city = City.findByName(currentTenant.capitalize())
+        City city = City.findByNameOrUrlSlug(currentTenant.capitalize(),currentTenant)
 
         if (!city){
             if (!currentTenant == 'DEFAULT'){
