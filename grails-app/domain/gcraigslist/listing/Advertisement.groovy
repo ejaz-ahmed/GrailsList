@@ -1,6 +1,8 @@
 package gcraigslist.listing
 
-class Advertisement {
+import grails.gorm.MultiTenant
+
+class Advertisement implements MultiTenant<Advertisement> {
 
     static constraints = {
     }
